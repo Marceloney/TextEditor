@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 
 namespace TextEditor
@@ -30,13 +31,35 @@ namespace TextEditor
 
         }
 
-        static void Abrir()
+        static void Abrir(string text)
         {
+            Console.Clear();
+            Console.WriteLine("Qual caminho para salvar o arquivo?");
+            var path = Console.ReadLine();
+
+            using(var file = new StreamWriter(path))
+            {
+                file.Write(text);
+            }
 
         }
 
         static void Editar()
-        {
+        {   
+            Console.Clear();
+            Console.WriteLine("Digite seu texto abaixo (ESC para sair)");
+            Console.WriteLine("----------------");
+            string text = "";
+
+            do
+            {
+                text += Console.ReadLine();
+                text += Environment.NewLine;   
+            }
+            while(Console.ReadKey().Key != ConsoleKey.Escape);
+
+            Console.Write(text);
+
 
         }
     }
